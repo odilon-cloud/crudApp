@@ -1,5 +1,6 @@
 package com.odilon.crudApp.controlers;
 
+import com.odilon.crudApp.Repository.CourseRepository;
 import com.odilon.crudApp.Repository.RegistrationRepository;
 import com.odilon.crudApp.Repository.StudentCourseRepository;
 import com.odilon.crudApp.model.EAcademicUnit;
@@ -19,7 +20,8 @@ public class ListController {
     @Autowired
     private RegistrationRepository registrationRepository;
 
-
+    @Autowired
+    private CourseRepository courseRepository;
 
     @GetMapping("/students-by-semester")
     public ResponseEntity<List<Object[]>> getStudentsBySemester(@RequestParam String semesterName) {
@@ -43,6 +45,23 @@ public class ListController {
         return ResponseEntity.ok(students);
     }
 
+    @GetMapping("/courses-by-department-semester")
+    public ResponseEntity<List<Object[]>> getCoursesByDepartmentAndSemester(
+            @RequestParam String semesterName,
+            @RequestParam String academicUnitName) {
 
+        List<Object[]> courses = courseRepository
+                .findCoursesByDepartmentAndSemester(semesterName, academicUnitName);
+
+        return ResponseEntity.ok(courses);
+    }
+
+    @GetMapping("/courses-by-student-regno")
+    public ResponseEntity<List<Object[]>> getCoursesByStudentRegNo(@RequestParam String studentRegNo) {
+
+        List<Object[]> courses = courseRepository.findCoursesByStudentRegNo(studentRegNo);
+
+        return ResponseEntity.ok(courses);
+    }
 
 }
