@@ -10,7 +10,7 @@ public class CDefinition {
 	 @Id
 	    private String id; 
 	    @Column(name = "course_code")
-	    private String course_code; // Code now corresponds to 'code' in the table
+	    private String course_code;
 
 	    @Column(name = "name")
 	    private String name;

@@ -20,8 +20,6 @@ public class ListController {
     private RegistrationRepository registrationRepository;
 
 
-    @Autowired
-    private StudentCourseRepository studentCourseRepository;
 
     @GetMapping("/students-by-semester")
     public ResponseEntity<List<Object[]>> getStudentsBySemester(@RequestParam String semesterName) {
@@ -36,14 +34,15 @@ public class ListController {
         List<Registration> students = registrationRepository.findBySemesterNameAndAcademicUnit_AcademicUnitType(semesterName, academicUnitType);
         return ResponseEntity.ok(students);
     }
-    @GetMapping("/students-by-course-semester")
-    public ResponseEntity<List<StudentCourse>> getStudentsByCourseAndSemester(
-            @RequestParam String semesterName,
-            @RequestParam String courseName) {
 
-        List<StudentCourse> students = studentCourseRepository.findByCourse_Semester_NameAndCourse_CDefinition_Name(semesterName, courseName);
+    @GetMapping("/students-by-course-semester")
+    public ResponseEntity<List<Object[]>> getStudentsByCourseAndSemester(@RequestParam String semesterName, @RequestParam String cdefinitionName) {
+
+        List<Object[]> students = registrationRepository.findStudentsByCourseAndSemester(semesterName, cdefinitionName);
 
         return ResponseEntity.ok(students);
     }
+
+
 
 }

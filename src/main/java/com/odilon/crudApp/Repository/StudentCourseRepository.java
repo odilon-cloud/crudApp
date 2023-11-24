@@ -6,5 +6,5 @@ import java.util.List;
 
 
 public interface StudentCourseRepository extends JpaRepository<StudentCourse, Integer>{
-    List<StudentCourse> findByCourse_Semester_NameAndCourse_CDefinition_Name(String semesterName, String courseName);
+
 }
