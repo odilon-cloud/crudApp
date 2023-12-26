@@ -15,13 +15,11 @@ public class AcademicUnit {
     
     @Column(name = "parentId")
     private String parentId;
-    // Add a field to represent the academic unit type
     
     @Enumerated(EnumType.STRING)
     @JoinColumn(name = "academicUnitType")
     private EAcademicUnit academicUnitType;
 
-    // Add a field for self-referencing parent academic unit
     @ManyToOne
     @JoinColumn(name = "parentId", referencedColumnName = "code", insertable = false, updatable = false)
     private AcademicUnit parentAcademicUnit;
